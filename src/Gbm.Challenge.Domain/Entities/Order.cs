@@ -1,6 +1,4 @@
-﻿using Gbm.Challenge.Domain.Common;
-
-namespace Gbm.Challenge.Domain.Models;
+﻿namespace Gbm.Challenge.Domain.Entities;
 
 public class Order : EntityBase
 {

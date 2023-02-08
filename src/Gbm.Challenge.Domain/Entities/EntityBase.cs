@@ -1,4 +1,4 @@
-﻿namespace Gbm.Challenge.Domain.Common;
+﻿namespace Gbm.Challenge.Domain.Entities;
 
 public abstract class EntityBase
 {

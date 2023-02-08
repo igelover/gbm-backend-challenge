@@ -1,4 +1,4 @@
-﻿namespace Gbm.Challenge.Application.DTOs;
+﻿namespace Gbm.Challenge.Application.Models.DTOs;
 
 public class IssuerDTO
 {

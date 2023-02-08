@@ -1,4 +1,4 @@
-﻿using Gbm.Challenge.Domain.Common;
+﻿using Gbm.Challenge.Domain.Entities;
 using System.Linq.Expressions;
 
 namespace Gbm.Challenge.Application.Contracts.Persistence;
