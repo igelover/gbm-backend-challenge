@@ -15,6 +15,11 @@ public class RepositoryBase<T> : IAsyncRepository<T> where T : EntityBase
         _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
     }
 
+    public async Task<T?> GetByIdAsync(int id)
+    {
+        return await _dbContext.Set<T>().FindAsync(id);
+    }
+
     public async Task<IReadOnlyList<T>> GetAllAsync()
     {
         return await _dbContext.Set<T>().ToListAsync();

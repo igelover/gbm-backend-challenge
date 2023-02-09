@@ -1,5 +1,7 @@
 using Gbm.Challenge.API.Models.Requests;
+using Gbm.Challenge.Application.Exceptions;
 using Gbm.Challenge.Application.Features.Accounts.Commands;
+using Gbm.Challenge.Domain.Models.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -29,7 +31,8 @@ namespace Gbm.Challenge.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> CreateAccount(
-            [Required][FromBody] CreateAccountRequest request)
+            [Required][FromBody] CreateAccountRequest request
+        )
         {
             try
             {
@@ -40,7 +43,38 @@ namespace Gbm.Challenge.API.Controllers
             }
             catch (ValidationException ex)
             {
-                return BadRequest(string.Join(',', ex.Errors.SelectMany(e => e.Value)));
+                return BadRequest(string.Join(' ', ex.Errors.SelectMany(e => e.Value)));
+            }
+        }
+
+        /// <summary>
+        /// Creates a new order for the specified account
+        /// </summary>
+        /// <param name="id">The account ID</param>
+        /// <param name="order">The order details</param>
+        /// <returns>The account current balance and order details</returns>
+        [HttpPost("{id}/orders")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> CreateOrder(
+            [Required][FromRoute] int id,
+            [Required][FromBody] OrderDTO order
+        )
+        {
+            try
+            {
+                var command = new CreateOrderCommand(id, order);
+                var result = await _mediator.Send(command);
+                _logger.LogDebug("Successfully created new order on account {id}", id);
+                return Ok(result);
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(string.Join(' ', ex.Errors.SelectMany(e => e.Value)));
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
         }
     }

@@ -1,5 +1,7 @@
+using Gbm.Challenge.API.Serialization;
 using Gbm.Challenge.Application;
 using Gbm.Challenge.Infrastructure;
+using System.Text.Json.Serialization;
 
 namespace Gbm.Challenge.API;
 
@@ -10,8 +12,13 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-
-        builder.Services.AddControllers();
+        builder.Services.AddControllers().AddJsonOptions(options =>
+        {
+            // Added to serialize enums as uppercase strings
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(new UpperCaseNamingPolicy()));
+            // Added to comply with serialization requierement (snake case)
+            options.JsonSerializerOptions.PropertyNamingPolicy = new SnakeCaseNamingPolicy();
+        });
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();

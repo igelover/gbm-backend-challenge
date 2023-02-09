@@ -1,7 +1,7 @@
 using FluentValidation;
 using Gbm.Challenge.Application.Contracts.Persistence;
-using Gbm.Challenge.Application.Models.DTOs;
 using Gbm.Challenge.Domain.Entities;
+using Gbm.Challenge.Domain.Models.DTOs;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -16,20 +16,20 @@ public class CreateAccountCommand : IRequest<AccountDTO>
         Cash = cash;
     }
 
-    public class AddAccountCommandValidator : AbstractValidator<CreateAccountCommand>
+    public class CreateAccountCommandValidator : AbstractValidator<CreateAccountCommand>
     {
-        public AddAccountCommandValidator()
+        public CreateAccountCommandValidator()
         {
             RuleFor(cmd => cmd.Cash).GreaterThan(decimal.Zero).WithMessage("Initial cash must be greater than zero.");
         }
     }
 
-    public class AddAccountCommandHandler : IRequestHandler<CreateAccountCommand, AccountDTO>
+    public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, AccountDTO>
     {
         private readonly IAccountRepository _repository;
-        private readonly ILogger<AddAccountCommandHandler> _logger;
+        private readonly ILogger<CreateAccountCommandHandler> _logger;
 
-        public AddAccountCommandHandler(IAccountRepository repository, ILogger<AddAccountCommandHandler> logger)
+        public CreateAccountCommandHandler(IAccountRepository repository, ILogger<CreateAccountCommandHandler> logger)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
