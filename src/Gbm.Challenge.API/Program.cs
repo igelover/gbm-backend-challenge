@@ -1,5 +1,6 @@
 using Gbm.Challenge.API.Serialization;
 using Gbm.Challenge.Application;
+using Gbm.Challenge.Domain.Common.Settings;
 using Gbm.Challenge.Infrastructure;
 using System.Text.Json.Serialization;
 
@@ -26,6 +27,9 @@ public class Program
         // Add custom services.
         builder.Services.AddApplicationServices();
         builder.Services.AddInfrastructureServices(builder.Configuration);
+        builder.Services.Configure<GbmChallengeSettings>(
+            builder.Configuration.GetSection(nameof(GbmChallengeSettings))
+        );
 
         var app = builder.Build();
 

@@ -38,7 +38,7 @@ public class CreateAccountCommand : IRequest<AccountDTO>
         public async Task<AccountDTO> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
         {
             var account = await _repository.AddAsync(new InvestmentAccount { Cash = request.Cash });
-            _logger.LogInformation("Account {id} successfully created.", account.Id);
+            _logger.LogDebug("Account {id} successfully created.", account.Id);
 
             return new AccountDTO
             {

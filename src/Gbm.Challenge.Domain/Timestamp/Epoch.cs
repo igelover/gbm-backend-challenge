@@ -1,5 +1,9 @@
 ﻿namespace Gbm.Challenge.Domain.Timestamp;
 
+/// <summary>
+/// Epoch implementation as per UNIX specification
+/// </summary>
+/// <see cref="https://unixtime.org/"/>
 public class Epoch
 {
     static readonly DateTime epochStart = new(1970, 1, 1, 0, 0, 0);
