@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Text;
 
 namespace Gbm.Challenge.Tests
@@ -49,7 +48,11 @@ namespace Gbm.Challenge.Tests
             _client.DefaultRequestHeaders.Add("x-device-shared-secret", apiKey);
 
             var request = new AuthenticationRequest { ClientName = clientName, ApiKey = apiKey };
-            var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+            var content = new StringContent(
+                JsonConvert.SerializeObject(request, JsonSerializationExtensions.SnakeCaseSettings),
+                Encoding.UTF8,
+                "application/json"
+            );
             var response = await _client.PostAsync("/auth", content);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -59,7 +62,9 @@ namespace Gbm.Challenge.Tests
 
         private async Task<HttpResponseMessage> CreateAccountResponse(decimal cash)
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(JwtBearerDefaults.AuthenticationScheme, await AquireTokenAsync());
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                JwtBearerDefaults.AuthenticationScheme, await AquireTokenAsync()
+            );
 
             var request = new CreateAccountRequest { Cash = cash };
             var content = new StringContent(
