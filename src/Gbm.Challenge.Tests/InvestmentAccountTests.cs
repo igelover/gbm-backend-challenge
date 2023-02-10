@@ -43,7 +43,7 @@ namespace Gbm.Challenge.Tests
             _application.Dispose();
         }
 
-        private async Task<string> AquireTokenAsync()
+        private async Task<string> AcquireTokenAsync()
         {
             _client.DefaultRequestHeaders.Add("x-device-shared-secret", apiKey);
 
@@ -63,7 +63,7 @@ namespace Gbm.Challenge.Tests
         private async Task<HttpResponseMessage> CreateAccountResponse(decimal cash)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-                JwtBearerDefaults.AuthenticationScheme, await AquireTokenAsync()
+                JwtBearerDefaults.AuthenticationScheme, await AcquireTokenAsync()
             );
 
             var request = new CreateAccountRequest { Cash = cash };
