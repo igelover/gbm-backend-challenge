@@ -7,7 +7,7 @@ public static class JsonSerializationExtensions
 {
     private static readonly SnakeCaseNamingStrategy _snakeCaseNamingStrategy = new();
 
-    private static readonly JsonSerializerSettings _snakeCaseSettings = new()
+    public static readonly JsonSerializerSettings SnakeCaseSettings = new()
     {
         ContractResolver = new DefaultContractResolver
         {
@@ -22,7 +22,7 @@ public static class JsonSerializationExtensions
             throw new ArgumentNullException(paramName: nameof(instance));
         }
 
-        return JsonConvert.SerializeObject(instance, _snakeCaseSettings);
+        return JsonConvert.SerializeObject(instance, SnakeCaseSettings);
     }
 
     public static string ToSnakeCase(this string @string)
