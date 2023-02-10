@@ -1,6 +1,7 @@
 ﻿using Gbm.Challenge.Application.Contracts.Persistence;
 using Gbm.Challenge.Infrastructure.Persistence;
 using Gbm.Challenge.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,5 +18,13 @@ public static class InfrastructureServiceRegistration
         services.AddScoped<IAccountRepository, AccountRepository>();
 
         return services;
+    }
+
+    public static void EnsureDatabaseSetup(this WebApplication app)
+    {
+        using var scope = app.Services.CreateScope();
+        var services = scope.ServiceProvider;
+        var db = services.GetRequiredService<DataContext>();
+        db.Database.EnsureCreated();
     }
 }

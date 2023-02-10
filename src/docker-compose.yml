@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  gbmdb:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+
+  gbm.challenge.api:
+    image: ${DOCKER_REGISTRY-}gbmchallengeapi
+    build:
+      context: .
+      dockerfile: Gbm.Challenge.API/Dockerfile

@@ -38,6 +38,7 @@ public class Program
         {
             app.UseSwagger();
             app.UseSwaggerUI();
+            app.EnsureDatabaseSetup();
         }
 
         app.UseHttpsRedirection();

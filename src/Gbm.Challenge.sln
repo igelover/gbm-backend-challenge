@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gbm.Challenge.API", "Gbm.Challenge.API\Gbm.Challenge.API.csproj", "{8130377F-204D-46B0-96F2-7542F80383CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gbm.Challenge.API", "Gbm.Challenge.API\Gbm.Challenge.API.csproj", "{8130377F-204D-46B0-96F2-7542F80383CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gbm.Challenge.Application", "Gbm.Challenge.Application\Gbm.Challenge.Application.csproj", "{C7085C81-B895-48EE-BB66-C61EF4F72B27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gbm.Challenge.Application", "Gbm.Challenge.Application\Gbm.Challenge.Application.csproj", "{C7085C81-B895-48EE-BB66-C61EF4F72B27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gbm.Challenge.Domain", "Gbm.Challenge.Domain\Gbm.Challenge.Domain.csproj", "{04CBC8A0-62AA-470D-A322-810BCDE5BB99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gbm.Challenge.Domain", "Gbm.Challenge.Domain\Gbm.Challenge.Domain.csproj", "{04CBC8A0-62AA-470D-A322-810BCDE5BB99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gbm.Challenge.Infrastructure", "Gbm.Challenge.Infrastructure\Gbm.Challenge.Infrastructure.csproj", "{7147C03E-66BE-4ACD-873E-C89536D5C1F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gbm.Challenge.Infrastructure", "Gbm.Challenge.Infrastructure\Gbm.Challenge.Infrastructure.csproj", "{7147C03E-66BE-4ACD-873E-C89536D5C1F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gbm.Challenge.Tests", "Gbm.Challenge.Tests\Gbm.Challenge.Tests.csproj", "{C77B81BF-6988-4C0D-BCC6-0CFABA3324AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gbm.Challenge.Tests", "Gbm.Challenge.Tests\Gbm.Challenge.Tests.csproj", "{C77B81BF-6988-4C0D-BCC6-0CFABA3324AE}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{35F333FC-EB40-44E2-9322-EFA0A3C4F4CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C77B81BF-6988-4C0D-BCC6-0CFABA3324AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C77B81BF-6988-4C0D-BCC6-0CFABA3324AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C77B81BF-6988-4C0D-BCC6-0CFABA3324AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35F333FC-EB40-44E2-9322-EFA0A3C4F4CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35F333FC-EB40-44E2-9322-EFA0A3C4F4CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35F333FC-EB40-44E2-9322-EFA0A3C4F4CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35F333FC-EB40-44E2-9322-EFA0A3C4F4CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
