@@ -6,15 +6,21 @@ using Gbm.Challenge.Domain.Models.DTOs;
 using Gbm.Challenge.Domain.Timestamp;
 using Gbm.Challenge.Infrastructure.Persistence;
 using Gbm.Challenge.Tests.Infrastructure;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System.Net;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
 
 namespace Gbm.Challenge.Tests
 {
     public class InvestmentAccountTests : IDisposable
     {
+        private const string clientName = "client1";
+        private const string apiKey = "apikey-ABC-123-XYZ-001";
+
         private const decimal cash = 1000m;
         private const int totalShares = 2;
         private const decimal sharePrice = 100m;
@@ -38,8 +44,23 @@ namespace Gbm.Challenge.Tests
             _application.Dispose();
         }
 
+        private async Task<string> AquireTokenAsync()
+        {
+            _client.DefaultRequestHeaders.Add("x-device-shared-secret", apiKey);
+
+            var request = new AuthenticationRequest { ClientName = clientName, ApiKey = apiKey };
+            var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+            var response = await _client.PostAsync("/auth", content);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            return await response.Content.ReadAsStringAsync();
+        }
+
         private async Task<HttpResponseMessage> CreateAccountResponse(decimal cash)
         {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(JwtBearerDefaults.AuthenticationScheme, await AquireTokenAsync());
+
             var request = new CreateAccountRequest { Cash = cash };
             var content = new StringContent(
                 JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json"

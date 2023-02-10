@@ -27,6 +27,8 @@ public class Program
         // Add custom services.
         builder.Services.AddApplicationServices();
         builder.Services.AddInfrastructureServices(builder.Configuration);
+        builder.Services.AddOpenApiDocumentation();
+        builder.Services.AddJwtAuthentication(builder.Configuration);
         builder.Services.Configure<GbmChallengeSettings>(
             builder.Configuration.GetSection(nameof(GbmChallengeSettings))
         );
@@ -43,11 +45,11 @@ public class Program
 
         app.UseHttpsRedirection();
 
+        app.UseOpenApiDocumentation();
+        app.UseAuthentication();
         app.UseAuthorization();
 
-
-        app.MapControllers();
-
+        app.MapSmartAcControllers();
         app.Run();
     }
 }

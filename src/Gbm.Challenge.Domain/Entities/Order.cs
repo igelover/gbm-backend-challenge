@@ -5,7 +5,7 @@ namespace Gbm.Challenge.Domain.Entities;
 public class Order : EntityBase
 {
     public int AccountId { get; set; }
-    public InvestmentAccount Account { get; set; } = new InvestmentAccount();
+    public InvestmentAccount Account { get; set; } = new();
     public DateTime Timestamp { get; set; }
     public OperationType Operation { get; set; }
     public string IssuerName { get; set; } = string.Empty;

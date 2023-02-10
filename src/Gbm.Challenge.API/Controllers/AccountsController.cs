@@ -3,14 +3,19 @@ using Gbm.Challenge.Application.Exceptions;
 using Gbm.Challenge.Application.Features.Accounts.Commands;
 using Gbm.Challenge.Domain.Models.DTOs;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using ValidationException = Gbm.Challenge.Application.Exceptions.ValidationException;
 
 namespace Gbm.Challenge.API.Controllers
 {
+    /// <summary>
+    /// Investment accounts and orders management
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
+    [Authorize("ChallengeApiUser")]
     public class AccountsController : ControllerBase
     {
         private readonly IMediator _mediator;
